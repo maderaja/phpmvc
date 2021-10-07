@@ -9,19 +9,8 @@
   <div class="row mb-3">
     <div class="col-lg-6 mx-auto">
       <button type="button" class="btn btn-primary tombolTambahData" data-bs-toggle="modal" data-bs-target="#formModal">
-        Tambah Data Siswa
+        Tambah Data Siswa [+]
       </button>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-6 mx-auto">
-      <form action="<?= BASEURL; ?>/siswa/cari" method="POST">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="cari siswa..." name="keyword" autocomplete="off">
-          <button class="btn btn-primary" type="submit" id="tombolCari">Cari</button>
-        </div>
-      </form>
     </div>
   </div>
 
@@ -29,14 +18,21 @@
     <div class="col-lg-6 mx-auto">
       <h3 class="mx-auto" style="width: fit-content;">Daftar Siswa</h3>
 
+      <form action="<?= BASEURL; ?>/siswa/cari" method="POST">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="cari siswa.." name="keyword" autocomplete="off">
+          <button class="btn btn-primary" type="submit" id="tombolCari">Cari</button>
+        </div>
+      </form>
+
       <ul class="list-group">
         <?php foreach ($data['swa'] as $swa) : ?>
           <li class="list-group-item  ">
             <?= $swa['nama']; ?>
 
-            <a href="<?= BASEURL; ?>/siswa/hapus/<?= $swa['id']; ?>" class="badge bg-danger float-end ms-1" style="text-decoration: none;" onclick="return confirm('Yakin akan menghapus data ini?');">hapus</a>
-            <a href="<?= BASEURL; ?>/siswa/ubah/<?= $swa['id']; ?>" class="badge bg-success float-end ms-1 tampilModalUbah" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $swa['id'] ?>">ubah</a>
-            <a href="<?= BASEURL; ?>/siswa/detail/<?= $swa['id']; ?>" class="badge bg-primary float-end ms-1" style="text-decoration: none;">detail</a>
+            <a href="<?= BASEURL; ?>/siswa/hapus/<?= $swa['id']; ?>" class="badge bg-danger float-end ms-1" style="text-decoration: none;" id="btn-hapus">hapus</a>
+            <a href="<?= BASEURL; ?>/siswa/ubah/<?= $swa['id']; ?>" class="badge bg-primary float-end ms-1 tampilModalUbah" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $swa['id'] ?>">ubah</a>
+            <a href="<?= BASEURL; ?>/siswa/detail/<?= $swa['id']; ?>" class="badge bg-success float-end ms-1" style="text-decoration: none;">detail</a>
           </li>
         <?php endforeach; ?>
       </ul>
@@ -75,7 +71,6 @@
 
           <label for="jurusan">Jurusan</label>
           <select class="form-select" id="jurusan" name="jurusan">
-            <option selected>-- Pilih Jurusan --</option>
             <option value="Teknik Informatika">Teknik Informatika</option>
             <option value="Teknik Mesin">Teknik Mesin</option>
             <option value="Teknik Listrik">Teknik Listrik</option>
